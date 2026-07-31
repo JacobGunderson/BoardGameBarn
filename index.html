@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahjong Social Club — The Board Game Barn, Salem UT</title>
+<style>
+  :root {
+    --barn-red: #c53a2c;
+    --barn-red-dark: #9c2a1e;
+    --mustard: #eda025;
+    --cream: #fbf3e3;
+    --cream-dark: #f2e4c6;
+    --forest: #3e7a45;
+    --ink: #2b2420;
+  }
+
+  @font-face {
+    font-family: "Texas Tango";
+    src: url("fonts/TexasTango-Bold.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background-image: url("Background-vertical.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--ink);
+    font-family: "Texas Tango", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px 64px;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .card {
+    background: #fffdf8;
+    border: 3px solid var(--ink);
+    border-radius: 28px;
+    padding: 40px 32px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Bunting strip along the top */
+  .bunting {
+    display: flex;
+    justify-content: space-between;
+    margin: -40px -32px 28px;
+    padding: 0 8px;
+  }
+  .bunting span {
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 26px solid var(--barn-red);
+  }
+  .bunting span:nth-child(2n) { border-top-color: var(--mustard); }
+  .bunting span:nth-child(3n) { border-top-color: var(--forest); }
+
+  h1.title {
+    font-size: clamp(1.4rem, 5.5vw, 2.1rem);
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .motif-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 14px 0 20px;
+  }
+  .motif-divider::before,
+  .motif-divider::after {
+    content: "";
+    height: 2px;
+    flex: 1 1 auto;
+    max-width: 100px;
+    background: var(--barn-red);
+  }
+  .motif-divider .diamond {
+    flex: 0 0 auto;
+    width: 11px;
+    height: 11px;
+    background: var(--mustard);
+    border: 2px solid var(--ink);
+    transform: rotate(45deg);
+  }
+
+  h2.main-title {
+    font-size: clamp(2.5rem, 9vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin: 0;
+    color: var(--barn-red);
+  }
+
+  .tagline-wrap { text-align: center; }
+
+  .tagline {
+    font-family: "Texas Tango", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest);
+    display: inline-block;
+    font-size: clamp(1.4rem, 5.5vw, 2rem);
+    margin: 18px 0 0;
+  }
+
+  p.body-copy {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: #453b33;
+    margin: 0 0 32px;
+  }
+
+  .meeting-box {
+    text-align: center;
+    background: var(--forest);
+    color: #fffdf8;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    padding: 18px 20px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin: 0 0 32px;
+    box-shadow: 6px 6px 0 var(--barn-red);
+  }
+
+  .meeting-label {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.35rem;
+    color: var(--mustard);
+    margin-bottom: 6px;
+  }
+
+  p.address-copy {
+    text-align: center;
+    background: var(--barn-red);
+    color: #fffdf8;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    padding: 18px 20px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin: 0 0 32px;
+    box-shadow: 6px 6px 0 var(--forest);
+  }
+
+  .illustration {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    margin-bottom: 32px;
+  }
+
+  .signup-wrap {
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .signup-btn {
+    display: inline-block;
+    font-family: inherit;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--barn-red-dark);
+    background: var(--cream-dark);
+    border: 2px dashed var(--barn-red);
+    border-radius: 14px;
+    padding: 16px 40px;
+    transition: opacity 0.08s ease;
+  }
+  .signup-btn:hover { opacity: 0.8; }
+  .signup-btn:active { opacity: 0.65; }
+
+
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+
+      <div class="bunting">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <h1 class="title">The Salem Board Game Barn Presents:</h1>
+
+      <div class="motif-divider" aria-hidden="true"><span class="diamond"></span></div>
+
+      <h2 class="main-title">Mahjong<br>Social Club</h2>
+      <div class="tagline-wrap">
+        <span class="tagline">Learn to Play: Free!</span>
+      </div>
+
+      <!-- Photo: the Board Game Barn -->
+      <img class="illustration" src="Fun Barn.jpeg" alt="The Board Game Barn">
+
+      <p class="body-copy">
+        No membership required. We are starting a group at the Salem Board Game Barn.
+        Come make friends and learn how to play American Mahjong.
+        <strong>In addition to people who want to learn, we are looking for people who know how to play and can help teach others.</strong>
+      </p>
+
+      <div class="meeting-box">
+        <span class="meeting-label">Upcoming Meeting Dates</span>
+        Will be decided soon. Click the "I'm Interested" button to let us know what time you prefer.
+      </div>
+
+      <p class="address-copy">
+        The Board Game Barn is located behind 42 E Center St, Salem, UT 84653.
+        Please park on the street near the church and be courteous to neighbors.
+      </p>
+
+      <!-- Photo: the mahjong table -->
+      <img class="illustration" src="Table.jpeg" alt="Mahjong table at the Board Game Barn">
+
+      <div class="signup-wrap">
+        <a class="signup-btn" href="https://forms.gle/Fut1BTVM9RQo1VUQ7" target="_blank" rel="noopener">I'm Interested!</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
